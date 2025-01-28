@@ -6,7 +6,7 @@ const formrouters=require("./Routers/formrouters")
 app.use(express.json())
 app.use('/myAdmin',formrouters)
 app.listen(8080,()=>{
-    console.log("Server is running"); 
+    console.log("Server is running on the port 8080"); 
 })
 // const nodemailer = require('nodemailer');
 
