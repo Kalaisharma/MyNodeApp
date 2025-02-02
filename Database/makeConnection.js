@@ -1,5 +1,5 @@
 const config = {
-  host: "mysql.railway.internal",
+  host: "junction.proxy.rlwy.net",
   user: "root", // Use a string for the username
   password: "glqrDDibgVXklvIWwAdZeqOjxdSXwZqv",
   port: 3306,
