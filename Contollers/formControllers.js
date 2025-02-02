@@ -125,6 +125,7 @@ const getCity = (req, res) => {
 };
 const getTourData = (req, res) => { 
   const body = req.body;
+  let membership=body.membershipvalue.toLowerCase();
   // console.log(body,"jdhkjldshgjksdhgkjsdhgskjdghskjg");
 
   const db = mysql.createConnection(configuration);
@@ -135,7 +136,7 @@ const getTourData = (req, res) => {
     }
     console.log("Connected to the database!");
     // const datequery=`SELECT CONVERT('${data.dob}', DATE)`;
-    const query = `select * from ${body.membershipvalue}data`;
+    const query = `select * from ${membership}data`;
     // Corrected query
     db.query(query, (err, result) => {
       if (err) {
