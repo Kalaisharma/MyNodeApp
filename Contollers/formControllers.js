@@ -19,7 +19,7 @@ const insertData = (req, res) => {
     }
     console.log("Connected to the database!");
     const checkquery = `select * from userdetails where email='${data.email}'`;
-    const query = `INSERT INTO userDetails (firstname, lastname, email, password, confirmpassword, contact, gender, dob, address) VALUES 
+    const query = `INSERT INTO userdetails (firstname, lastname, email, password, confirmpassword, contact, gender, dob, address) VALUES 
         ('${data.firstname}', '${data.lastname}', '${data.email}', '${data.password}', '${data.confirmpassword}', '${data.contact}', '${data.gender}', '${data.dob}', '${data.address}')`;
     // Corrected query
     db.query(checkquery, (err, result) => {
