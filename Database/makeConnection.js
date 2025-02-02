@@ -1,5 +1,5 @@
 const config = {
-  host: "junction.proxy.rlwy.net:11968",
+  host: "junction.proxy.rlwy.net",
   user: "root", // Use a string for the username
   password: "glqrDDibgVXklvIWwAdZeqOjxdSXwZqv",
   port: 3306,
