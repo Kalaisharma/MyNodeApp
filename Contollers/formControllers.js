@@ -15,7 +15,7 @@ const insertData = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const checkquery = `select * from userdetails where email='${data.email}'`;
@@ -25,21 +25,21 @@ const insertData = (req, res) => {
     db.query(checkquery, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
       // db.end(); // Close the connection
       if (result.length > 0) {
-        res.status(400).send({ message: "User Already Exists" });
+        return res.status(400).send({ message: "User Already Exists" });
       } else {
         db.query(query, (err, result) => {
           if (err) {
             console.error("Error executing query:", err);
-            res.status(500).send({ message: "Invalid Query" });
+            return res.status(500).send({ message: "Invalid Query" });
           }
           //console.log('Query result:', result);
           db.end(); // Close the connection
-          res.status(200).send({ message: "SUCCESS" });
+          return res.status(200).send({ message: "SUCCESS" });
         });
       }
     });
@@ -50,7 +50,7 @@ const senddata = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     // const datequery=`SELECT CONVERT('${data.dob}', DATE)`;
@@ -59,10 +59,10 @@ const senddata = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
-      res.status(200).send(result);
+      return res.status(200).send(result);
       db.end(); // Close the connection
     });
   });
@@ -72,7 +72,7 @@ const getMembership = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     // const datequery=`SELECT CONVERT('${data.dob}', DATE)`;
@@ -81,10 +81,10 @@ const getMembership = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       // console.log('Query result:', result);
-      res.status(200).send(result);
+      return res.status(200).send(result);
       db.end(); // Close the connection
     });
   });
@@ -97,7 +97,7 @@ const getCity = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     // const datequery=`SELECT CONVERT('${data.dob}', DATE)`;
@@ -115,10 +115,10 @@ const getCity = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
-      res.status(200).send(result);
+      return res.status(200).send(result);
       db.end(); // Close the connection
     });
   });
@@ -131,7 +131,7 @@ const getTourData = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     // const datequery=`SELECT CONVERT('${data.dob}', DATE)`;
@@ -140,9 +140,9 @@ const getTourData = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
-      res.status(200).send(result);
+      return res.status(200).send(result);
       db.end(); // Close the connection
     });
   });
@@ -155,7 +155,7 @@ const checkLogin = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from userdetails where email='${body.email}' and password='${body.password}'`;
@@ -163,13 +163,13 @@ const checkLogin = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -183,7 +183,7 @@ const emailexist = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from userdetails where email='${body.email}'`;
@@ -191,13 +191,13 @@ const emailexist = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result.length);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -211,7 +211,7 @@ const updatepassword = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `update userdetails 
@@ -221,13 +221,13 @@ const updatepassword = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
       if (result) {
-        res.status(200).send({ message: "success" });
+        return res.status(200).send({ message: "success" });
       } else {
-        res.status(400).send({ message: "failure" });
+        return res.status(400).send({ message: "failure" });
       }
       db.end(); // Close the connection
     });
@@ -238,7 +238,7 @@ const blogdata = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from blogs`;
@@ -246,13 +246,13 @@ const blogdata = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -265,7 +265,7 @@ const getpackagedata = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from tourpackages where placeId=${body.membershipvalue}`;
@@ -273,13 +273,13 @@ const getpackagedata = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -292,7 +292,7 @@ const BookTour = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `INSERT INTO TourBookings (membership, city, accountType, childcount, adultcount, packagetype, startdate, enddate, email)
@@ -303,13 +303,13 @@ const BookTour = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result:", result);
       if (result.affectedRows > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -320,7 +320,7 @@ const getDestination = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from placesview`; 
@@ -328,13 +328,13 @@ const getDestination = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" }); 
+        return res.status(500).send({ message: "Invalid Query" }); 
       }
       //console.log('Query result:', result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -346,7 +346,7 @@ const getFavourites = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from Favourites where email='${body.mail}'`;
@@ -354,13 +354,13 @@ const getFavourites = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result", result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send("no data");
+        return res.status(400).send("no data");
       }
       db.end(); // Close the connection
     });
@@ -376,7 +376,7 @@ const addFavourites = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     let query = `select * from Favourites where placeid=${placeid} and email='${email}'`;
@@ -385,7 +385,7 @@ const addFavourites = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
         return;
       }
       if (visible) {
@@ -403,14 +403,14 @@ const addFavourites = (req, res) => {
       db.query(query, (err, result) => {
         if (err) {
           console.error("Error executing query:", err);
-          res.status(500).send({ message: "Invalid Query" });
+          return res.status(500).send({ message: "Invalid Query" });
           return;
         }
         //console.log('Query result:', result);
         if (result.affectedRows > 0) {
-          res.status(200).send(resultmessage);
+          return res.status(200).send(resultmessage);
         } else {
-          res.status(400).send("No rows affected");
+          return res.status(400).send("No rows affected");
         }
         db.end(); // Close the connection
       });
@@ -426,7 +426,7 @@ const removeFavourites = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `delete from Favourites where email='${email}' and placeid=${placeid}`;
@@ -434,13 +434,13 @@ const removeFavourites = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result", result);
       if (result.affectedRows > 0) {
-        res.status(200).send("done");
+        return res.status(200).send("done");
       } else {
-        res.status(400).send("no data");
+        return res.status(400).send("no data");
       }
       db.end(); // Close the connection
     });
@@ -455,7 +455,7 @@ const getBookings = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from tourbookings where email='${mydata}'`;
@@ -463,13 +463,13 @@ const getBookings = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result", result, query);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send(result);
+        return res.status(400).send(result);
       }
       db.end(); // Close the connection
     });
@@ -480,7 +480,7 @@ const getRegions = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from Regions`;
@@ -488,13 +488,13 @@ const getRegions = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result", result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send("no data");
+        return res.status(400).send("no data");
       }
       db.end(); // Close the connection
     });
@@ -508,7 +508,7 @@ const getPlaces = (req, res) => {
   db.connect((err) => {
     if (err) {
       console.error("Error connecting to the database:", err);
-      res.status(500).send({ message: "Error connecting to the database" });
+      return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
     const query = `select * from countries where countryrefid=${body.regionid}`;
@@ -516,13 +516,13 @@ const getPlaces = (req, res) => {
     db.query(query, (err, result) => {
       if (err) {
         console.error("Error executing query:", err);
-        res.status(500).send({ message: "Invalid Query" });
+        return res.status(500).send({ message: "Invalid Query" });
       }
       console.log("Query result", result);
       if (result.length > 0) {
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(400).send("no data");
+        return res.status(400).send("no data");
       }
       db.end(); // Close the connection
     });

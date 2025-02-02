@@ -4,6 +4,7 @@ const config = {
   password: "glqrDDibgVXklvIWwAdZeqOjxdSXwZqv",
   port: 3306,
   database: "railway", // Change this to your actual database name
+  connectTimeout: 10000
 };
 module.exports={config}
 
