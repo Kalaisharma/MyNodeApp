@@ -1,12 +1,13 @@
+require("dotenv").config();
 const config = {
-  host: "junction.proxy.rlwy.net",
-  user: "root", // Use a string for the username
-  password: "glqrDDibgVXklvIWwAdZeqOjxdSXwZqv",
-  port: 11968,
-  database: "railway", // Change this to your actual database name
-  connectTimeout: 10000
+  host: process.env.MYSQLHOST,
+  user: process.env.MYSQLUSER, // Use a string for the username
+  password: process.env.MYSQLPASSWORD,
+  port: process.env.MYSQLPORT,
+  database: process.env.MYSQLDATABASE, // Change this to your actual database name
 };
 module.exports={config}
+
 
 
 
