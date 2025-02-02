@@ -349,7 +349,7 @@ const getFavourites = (req, res) => {
       return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
-    const query = `select * from Favourites where email='${body.mail}'`;
+    const query = `select * from favourites where email='${body.mail}'`;
     // Corrected query
     db.query(query, (err, result) => {
       if (err) {
@@ -379,7 +379,7 @@ const addFavourites = (req, res) => {
       return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
-    let query = `select * from Favourites where placeid=${placeid} and email='${email}'`;
+    let query = `select * from favourites where placeid=${placeid} and email='${email}'`;
     let resultmessage = "";
     // Corrected query
     db.query(query, (err, result) => {
@@ -391,13 +391,13 @@ const addFavourites = (req, res) => {
       if (visible) {
         if (result.length > 0) {
           resultmessage = "already there";
-          query = `update Favourites set placeid=${placeid} WHERE placeid=${placeid} AND email='${email}'`;
+          query = `update favourites set placeid=${placeid} WHERE placeid=${placeid} AND email='${email}'`;
         } else {
-          query = `INSERT INTO Favourites (placeid, img, name, description, email) VALUES (${placeid}, '${img}', '${name}', '${desc}', '${email}')`;
+          query = `INSERT INTO favourites (placeid, img, name, description, email) VALUES (${placeid}, '${img}', '${name}', '${desc}', '${email}')`;
           resultmessage = "Inserted";
         }
       } else {
-        query = `DELETE FROM Favourites WHERE placeid=${placeid} AND email='${email}'`;
+        query = `DELETE FROM favourites WHERE placeid=${placeid} AND email='${email}'`;
         resultmessage = "Deleted";
       }
       db.query(query, (err, result) => {
@@ -429,7 +429,7 @@ const removeFavourites = (req, res) => {
       return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
-    const query = `delete from Favourites where email='${email}' and placeid=${placeid}`;
+    const query = `delete from favourites where email='${email}' and placeid=${placeid}`;
     // Corrected query
     db.query(query, (err, result) => {
       if (err) {
@@ -483,7 +483,7 @@ const getRegions = (req, res) => {
       return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
-    const query = `select * from Regions`;
+    const query = `select * from regions`;
     // Corrected query
     db.query(query, (err, result) => {
       if (err) {
