@@ -103,12 +103,12 @@ const getCity = (req, res) => {
     // const datequery=`SELECT CONVERT('${data.dob}', DATE)`;
     let query = ``;
     if (payload.adventure === "AdventurousForest") {
-      query = `select forestname as name,forestvideosrc as videosrc from ${payload.adventure}`;
+      query = `select forestname as name,forestvideosrc as videosrc from adventuroudforest`;
     } else if (payload.adventure === "HillStation") {
-      query = `select hillname as name,hillvideosrc as videosrc from ${payload.adventure}`;
+      query = `select hillname as name,hillvideosrc as videosrc from hillstation`;
     }
     if (payload.adventure === "CityandBeach") {
-      query = `select cityname as name,cityvideosrc as videosrc from ${payload.adventure}`;
+      query = `select cityname as name,cityvideosrc as videosrc from cityandbeach`;
     }
 
     // Corrected query
