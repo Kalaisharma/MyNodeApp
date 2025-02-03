@@ -296,7 +296,7 @@ const BookTour = (req, res) => {
       return res.status(500).send({ message: "Error connecting to the database" });
     }
     console.log("Connected to the database!");
-    const query = `INSERT INTO TourBookings (membership, city, accountType, childcount, adultcount, packagetype, startdate, enddate, email)
+    const query = `INSERT INTO tourbookings (membership, city, accountType, childcount, adultcount, packagetype, startdate, enddate, email)
                VALUES ('${body.membership}', '${body.city}', '${body.accountType}', 
                ${body.childcount}, ${body.adultcount}, '${body.packagetype}', '${body.startdate}',
                 '${body.enddate}', '${body.email}')`;
